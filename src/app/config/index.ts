@@ -9,4 +9,8 @@ export default {
   bcrypt_salt_rounds: process.env.BCRYPT_SALT_ROUNDS,
   jwt_access_secret: process.env.JWT_ACCESS_SECRET,
   jwt_refresh_secret: process.env.JWT_REFRESH_SECRET,
+  emailSender: {
+    email: process.env.EMAIL_SENDER_EMAIL,
+    app_pass: process.env.EMAIL_SENDER_APP_PASS,
+  },
 };

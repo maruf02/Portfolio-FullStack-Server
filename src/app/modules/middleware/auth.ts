@@ -58,7 +58,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
       throw new AppError(StatusCodes.FORBIDDEN, "You are not authorized!");
     }
 
-    req.userAll = decoded;
+    // req.userAll = decoded;
     next();
   });
 };

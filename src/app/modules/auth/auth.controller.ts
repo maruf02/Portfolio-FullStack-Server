@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import catchAsync from "../utils/cacheAsync";
 import sendResponse from "../utils/sendResponse";
 import { AuthServices } from "./auth.service";
+import { Request } from "express";
 
 const transformUserResponse = (user: any, token: any) => {
   return {
@@ -71,8 +72,24 @@ const logoutUser = catchAsync(async (req, res) => {
   });
 });
 
+const forgotPassword = catchAsync(async (req, res) => {
+  const emailInfo = req.body;
+
+  console.log("emailInfo", emailInfo);
+  await AuthServices.forgotPassword(emailInfo);
+
+  console.log(req.body);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "Check your email!",
+    data: null,
+  });
+});
+
 export const AuthControllers = {
   loginUser,
   refreshToken,
   logoutUser,
+  forgotPassword,
 };

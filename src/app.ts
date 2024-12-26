@@ -7,6 +7,7 @@ import { UserRoutes } from "./app/modules/user/user.route";
 import { authRoutes } from "./app/modules/auth/auth.route";
 import { SkillRoutes } from "./app/modules/skills/skills.route";
 import { projectRoutes } from "./app/modules/projects/projects.route";
+import { BlogRoutes } from "./app/modules/blogs/blogs.route";
 
 // const port = 3000;
 
@@ -15,7 +16,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://techx-client.vercel.app", "*"],
+    origin: [
+      "http://localhost:5173",
+      "https://marufk20-server.vercel.app",
+      "*",
+    ],
     credentials: true,
   })
 );
@@ -24,6 +29,7 @@ app.use("/api", UserRoutes);
 app.use("/api", authRoutes);
 app.use("/api", SkillRoutes);
 app.use("/api", projectRoutes);
+app.use("/api", BlogRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");

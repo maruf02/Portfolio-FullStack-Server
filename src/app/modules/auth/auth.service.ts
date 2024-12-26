@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import AppError from "../utils/AppError";
 import config from "../../config";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import emailSender from "./emailSender";
 
 const loginUser = async (payload: TLoginUser) => {
   console.log(payload); //body theke asa email r password
@@ -100,7 +101,29 @@ const refreshToken = async (token: string, payload: TLoginUser) => {
   };
 };
 
+const forgotPassword = async (emailInfo) => {
+  const { name, email, number, message } = emailInfo;
+  await emailSender(
+    email,
+    `
+        <div>
+            <p>Dear ${name},</p>
+            <h1>Thanks you for touch me</h1>
+            <h1>I will give you touch very shortly</h1>
+            <h2>your message</h2>
+            <p>Name:${name}</p>
+            <p>Email:${email}</p>
+            <p>Number:${number}</p>
+            <p>Message:${message}</p>
+                  <p>Thank you</p>
+        </div>
+        `
+  );
+  //console.log(resetPassLink)
+};
+
 export const AuthServices = {
   loginUser,
   refreshToken,
+  forgotPassword,
 };
